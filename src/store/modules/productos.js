@@ -1,6 +1,7 @@
 export const productosModule = {
   namespaced: true,
   state: {
+    busqueda: "",
     todosLosProductos: [
       {
         id: 1,
@@ -52,12 +53,45 @@ export const productosModule = {
     },
     ]
   },
+  getters:{
+    productoSegunBusqueda(state) {
+      // state.busqueda
+      if (state.busqueda === "") {
+        return [];
+      } else {
+        return state.todosLosProductos.filter((producto) =>
+          producto.nombre.toLowerCase().includes(state.busqueda.toLowerCase())
+        );
+      }
+    },
+    productoSegunCategoria(state){
+      if (state.busqueda === "") {
+        return [];
+      } else {
+        return state.todosLosProductos.filter((producto) =>
+          producto.categoria.toLowerCase().includes(state.busqueda.toLowerCase())
+        );
+      }
+    },
+  },
   mutations: {
+    SET_BUSQUEDA(state, nuevaBusqueda) {
+      state.busqueda = nuevaBusqueda;
+    },
     AGREGAR_PRODUCTO(state, nuevoProducto) {
       state.todosLosProductos.push(nuevoProducto)
     }
   },
   actions: {
+    setBusqueda(context, nuevaBusqueda) {
+      if (typeof nuevaBusqueda === "string") {
+        context.commit("SET_BUSQUEDA", nuevaBusqueda);
+      } else {
+        console.warn(
+          `nuevaBusqueda debiese de ser de tipo string y recibí un tipo ${typeof nuevaBusqueda}`
+        );
+      }
+    },
     crearProducto(context, producto) {
       context.commit('AGREGAR_PRODUCTO', producto)
     }

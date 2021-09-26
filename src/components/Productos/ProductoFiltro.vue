@@ -1,6 +1,10 @@
 <template>
-  <div>
-       <div class="card mx-auto" style="width: 18rem;">
+<div class="row">
+  <div class="col-sm mb-4 mb-md-0">
+    <div v-for="(producto, $index) in productos"
+        :key="$index">
+
+       <div class="card mx-auto" style="width: 18rem;"  >
          <p class="card-text mb-0 mr-4"><small class="card-sale">{{producto.oferta ? 'Sale': ''}}</small></p>
         <img :src="producto.imagen" class="card-img-top" alt="...">
         <div class="card-body">
@@ -11,10 +15,9 @@
             <li class="list-group-item">Precio: ${{ producto.precio }}</li>
             <li class="list-group-item">Descuento: {{producto.oferta ? `${producto.descuento}% off` : 'Sin descuento asociado'}}</li>
          </ul>
-         <div class="card-actions">
-           <button class="btn btn-store" @click="agregarProductoAlCarrito">Agregar al carrito</button>
-         </div>
         </div>
+        </div>
+      </div>
     </div>
     </div>
 </template>
@@ -22,12 +25,9 @@
 <script>
 export default {
   props: {
-    producto: { type: Object, required: true }
+    productos: { type: Array, required: true }
   },
   methods:{
-    agregarProductoAlCarrito(){
-      this.$store.dispatch('carrito/agregarProducto', this.producto);
-    }
   }
 }
 </script>

@@ -19,6 +19,11 @@ const routes = [
     name: 'CarritoDeCompras',
     component: () => import('../views/Carrito.vue')
   },
+  {
+    path: '/busqueda',
+    name: 'Buscador',
+    component: () => import('../components/Productos/Buscador.vue')
+  },
 ]
 
 const router = new VueRouter({

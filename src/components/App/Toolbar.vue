@@ -29,7 +29,9 @@ export default {
     items: [
       { text: 'Inicio', to: '/' },
       { text: 'Nuevo producto', to: '/nuevo-producto' },
+       { text: 'Buscador', to: '/busqueda' },
       { text: 'Carrito de compras', to: '/carrito' },
+     
     ]
   })
 }
